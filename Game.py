@@ -1,19 +1,25 @@
-from GameBoard import create_board
+from GameBoard import create_empty_board
 from State import print_state
+from State import State
 from StateChecker import check_game_state
-from InputHandler import  handle_coordinates
+from Player import Player
+from Level import Level
 
 
 def play_game():
-    board_string = input("Enter the cells: ")
-    board = create_board(board_string)
+    board = create_empty_board()
     print(board)
-    coordinates = []
-    while not coordinates:
-        coord_str = input("Enter the coordinates: ")
-        coordinates = handle_coordinates(coord_str, board)
-    symbol = board.get_next_player()
-    board.update_cell(row_num=coordinates[0] - 1, col_num=coordinates[1] - 1, symbol=symbol)
-    print(board)
-    state = check_game_state(board)
+    user_player = Player(symbol="X", is_user=True)
+    comp_player = Player(symbol="O", is_user=False)
+    is_user_turn = True
+    while True:
+        if is_user_turn:
+            user_player.make_user_move(board)
+        else:
+            comp_player.make_computer_move(Level.EASY, board)
+        is_user_turn = not is_user_turn
+        print(board)
+        state = check_game_state(board)
+        if state == State.O_WINS or state == State.X_WINS:
+            break
     print_state(state)

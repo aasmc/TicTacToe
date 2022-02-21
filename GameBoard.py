@@ -1,5 +1,6 @@
 from BoardRow import create_row
 from Cell import Cell
+from BoardRow import create_empty_row
 
 
 class GameBoard:
@@ -46,6 +47,9 @@ def create_board(input_str):
     return GameBoard(rows)
 
 
+def create_empty_board():
+    rows = [create_empty_row(i) for i in range(0, 3)]
+    return GameBoard(rows)
 
 
 

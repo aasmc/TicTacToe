@@ -13,3 +13,7 @@ def create_cell(symbol, col_num, row_num):
     occupied = symbol == "X" or symbol == "O"
     cell_symbol = symbol if symbol != "_" else " "
     return Cell(col_num=col_num, row_num=row_num, occupied=occupied, symbol=cell_symbol)
+
+
+def create_empty_cell(col_num, row_num):
+    return Cell(col_num=col_num, row_num=row_num, occupied=False, symbol=" ")

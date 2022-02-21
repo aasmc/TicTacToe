@@ -1,4 +1,5 @@
 from Cell import create_cell
+from Cell import create_empty_cell
 
 
 class BoardRow:
@@ -24,4 +25,9 @@ class BoardRow:
 
 def create_row(row_num, input_str):
     cells = [create_cell(symbol=input_str[i], col_num=i, row_num=row_num) for i in range(0, 3)]
+    return BoardRow(cells)
+
+
+def create_empty_row(row_num):
+    cells = [create_empty_cell(col_num=i, row_num=row_num) for i in range(0, 3)]
     return BoardRow(cells)

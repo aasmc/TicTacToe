@@ -27,3 +27,4 @@ def get_coordinates(row_num, col_num, board, is_user):
 
 def handle_int_coordinates(row_num, col_num, board):
     return get_coordinates(row_num=row_num, col_num=col_num, board=board, is_user=False)
+

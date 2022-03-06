@@ -357,3 +357,202 @@ X wins
 
 Input command: > exit
 ```
+
+## Stage 4
+### Objectives
+
+When the AI is playing at medium difficulty level, it makes moves using the following logic:
+
+- If it already has two in a row and can win with one further move, it does so.
+- If its opponent can win with one move, it plays the move necessary to block this.
+- Otherwise, it makes a random move.
+
+You should add a medium parameter so that you can play against this level. It should also be possible to make AIs using easy and medium levels play against each other!
+### Example
+
+The example below shows how your program should work.
+The greater-than symbol followed by a space (> ) represents the user input. Note that it's not part of the input.
+```text
+Input command: > start user medium
+---------
+|       |
+|       |
+|       |
+---------
+Enter the coordinates: > 2 2
+---------
+|       |
+|   X   |
+|       |
+---------
+Making move level "medium"
+---------
+|       |
+|   X   |
+| O     |
+---------
+Enter the coordinates: > 1 1
+---------
+| X     |
+|   X   |
+| O     |
+---------
+Making move level "medium"
+---------
+| X     |
+|   X   |
+| O   O |
+---------
+Enter the coordinates: > 3 3
+---------
+| X     |
+|   X   |
+| O X O |
+---------
+Making move level "medium"
+---------
+| X O   |
+|   X   |
+| O X O |
+---------
+Enter the coordinates: > 2 1
+---------
+| X O   |
+| X X   |
+| O X O |
+---------
+Making move level "medium"
+---------
+| X O   |
+| X X O |
+| O X O |
+---------
+Enter the coordinates: > 1 3
+---------
+| X O X |
+| X X O |
+| O X O |
+---------
+Draw
+
+Input command: > start medium user
+---------
+|       |
+|       |
+|       |
+---------
+Making move level "medium"
+---------
+|       |
+|       |
+|   X   |
+---------
+Enter the coordinates: > 2 2
+---------
+|       |
+|   O   |
+|   X   |
+---------
+Making move level "medium"
+---------
+|       |
+|   O   |
+| X X   |
+---------
+Enter the coordinates: > 3 3
+---------
+|       |
+|   O   |
+| X X O |
+---------
+Making move level "medium"
+---------
+| X     |
+|   O   |
+| X X O |
+---------
+Enter the coordinates: > 2 1
+---------
+| X     |
+| O O   |
+| X X O |
+---------
+Making move level "medium"
+---------
+| X     |
+| O O X |
+| X X O |
+---------
+Enter the coordinates: > 1 3
+---------
+| X   O |
+| O O X |
+| X X O |
+---------
+Making move level "medium"
+---------
+| X X O |
+| O O X |
+| X X O |
+---------
+Draw
+
+Input command: > exit
+```
+
+## Stage 5
+### Objectives
+
+In this last stage, you need to implement the hard difficulty level using the minimax algorithm.
+
+You should also add a hard parameter so that it's possible to play against this level.
+
+### Example
+```text
+Input command: > start hard user
+Making move level "hard"
+---------
+|       |
+| X     |
+|       |
+---------
+Enter the coordinates: > 2 2
+---------
+|       |
+| X O   |
+|       |
+---------
+Making move level "hard"
+---------
+|   X   |
+| X O   |
+|       |
+---------
+Enter the coordinates: > 3 2
+---------
+|   X   |
+| X O   |
+|   O   |
+---------
+Making move level "hard"
+---------
+| X X   |
+| X O   |
+|   O   |
+---------
+Enter the coordinates: > 3 1
+---------
+| X X   |
+| X O   |
+| O O   |
+---------
+Making move level "hard"
+---------
+| X X X |
+| X O   |
+| O O   |
+---------
+X wins
+
+Input command: > exit
+```

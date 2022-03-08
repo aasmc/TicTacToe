@@ -18,6 +18,13 @@ class GameBoard:
     def get_cell_at_position(self, row_num, col_num):
         return self.rows[row_num].cells[col_num]
 
+    def get_all_cells(self):
+        cells = [cell for row in self.rows for cell in row.cells]
+        return cells
+
+    def is_empty(self):
+        return all([not cell.occupied for row in self.rows for cell in row.cells])
+
     def get_next_player(self):
         count_x = 0
         count_o = 0

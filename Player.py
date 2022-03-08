@@ -3,6 +3,67 @@ from InputHandler import handle_int_coordinates
 from Level import Level
 import random
 from enum import Enum
+from StateChecker import check_game_state
+from State import State
+
+
+def get_minimax_coordinates(board, symbol, is_maximizing):
+    best_score = -1000 if is_maximizing else 1000
+    coords = []
+    new_symbol = "O" if is_maximizing else "X"
+    for i in range(0, 3):
+        for j in range(0, 3):
+            cell = board.rows[i].cells[j]
+            if not cell.occupied:
+                cell.symbol = symbol
+                cell.occupied = True
+                score = minimax(board, not is_maximizing, new_symbol)
+                cell.symbol = " "
+                cell.occupied = False
+                if is_maximizing and score > best_score:
+                    best_score = score
+                    coords = [i + 1, j + 1]
+                elif not is_maximizing and score < best_score:
+                    best_score = score
+                    coords = [i + 1, j + 1]
+    return coords
+
+
+def minimax(board, is_maximizing, symbol):
+    state = check_game_state(board)
+    if state == State.X_WINS:
+        return 1
+    elif state == State.O_WINS:
+        return -1
+    elif state == State.DRAW:
+        return 0
+
+    if is_maximizing:
+        best_score = -1000
+        for i in range(0, 3):
+            for j in range(0, 3):
+                cell = board.rows[i].cells[j]
+                if not cell.occupied:
+                    cell.symbol = symbol
+                    cell.occupied = True
+                    score = minimax(board, False, "O")
+                    cell.symbol = " "
+                    cell.occupied = False
+                    best_score = max(best_score, score)
+        return best_score
+    else:
+        best_score = 1000
+        for i in range(0, 3):
+            for j in range(0, 3):
+                cell = board.rows[i].cells[j]
+                if not cell.occupied:
+                    cell.symbol = symbol
+                    cell.occupied = True
+                    score = minimax(board, True, "X")
+                    cell.symbol = " "
+                    cell.occupied = False
+                    best_score = min(best_score, score)
+        return best_score
 
 
 class UserType(Enum):
@@ -78,4 +139,13 @@ class Player:
                 update_board(board, coordinates, self.symbol)
 
     def make_hard_move(self, board):
-        pass
+        if board.is_empty():
+            coordinates = get_random_coordinates(board)
+            update_board(board, coordinates, self.symbol)
+        else:
+            coordinates = get_minimax_coordinates(board, self.symbol, self.symbol == "X")
+            update_board(board, coordinates, self.symbol)
+
+
+
+
